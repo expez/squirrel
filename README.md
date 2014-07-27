@@ -11,17 +11,20 @@ Squirrel helps you with
 
 We want to test foo, but at the very bottom foo relies on bar and baz which call some external services.  In the repl we do:
 ```clj
-(recording [bar baz] "test/resources/nuts.edn"
+(recording [bar baz] some-file
   (foo user-id))
 ```
 
-This will record the observed input => output pairs for the functions `bar` and `baz` into `test/resources/nuts.edn` which we can use in our tests like this:
+This will record the observed input => output pairs for the functions `bar` and `baz` into `some-file` which we can use in our tests like this:
 
 ```clj
 (deftest foo-does-what-it-should
-  (with-recordings "test/resources/nuts.edn"
+  (with-recordings some-file
     (is (= (foo user-id) {:something "or other"}))))
 ```
+The data with squirrelled away, at the repl, will now be used to create mocks for `bar` and `baz`.
+
+Whenever the external services that `bar` and `baz` rely on, we can just hit the reple for another `recording` session.
 ## License
 
 Copyright © 2014 Lars Andersen
