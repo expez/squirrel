@@ -5,9 +5,9 @@
 (def mock (atom {}))
 
 (defn record
-      [f args]
-      (let [res (apply f args [])]
-        (swap! mock merge {(str (type f)) res})
+      [f & args]
+      (let [res (apply f args)]
+        (swap! mock merge {(str (type f)) {args res}})
         res))
 
 (defmacro recording [fns dest & body]
