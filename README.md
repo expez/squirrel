@@ -22,9 +22,9 @@ This will record the observed input => output pairs for the functions `bar` and 
   (with-recordings some-file
     (is (= (foo user-id) {:something "or other"}))))
 ```
-The data with squirrelled away, at the repl, will now be used to create mocks for `bar` and `baz`.
+The data we squirrelled away, at the repl, will now be used to create mocks for `bar` and `baz`.
 
-Whenever the external services that `bar` and `baz` rely on, we can just hit the reple for another `recording` session.
+Whenever the external services that `bar` and `baz` rely on change, we can just hit the repl for another `recording` session.
 ## License
 
 Copyright © 2014 Lars Andersen
