@@ -11,6 +11,8 @@ Squirrel helps you with
 
 We want to test foo, but at the very bottom foo relies on bar and baz which call some external services.  In the repl we do:
 ```clj
+(in-ns app.core)
+
 (recording [bar baz] some-file
   (foo user-id))
 ```
@@ -19,7 +21,8 @@ This will record the observed input => output pairs for the functions `bar` and 
 
 ```clj
 (deftest foo-does-what-it-should
-  (with-recordings some-file
+  (with-recordings [app.core/bar
+                    app.core/baz] some-file
     (is (= (foo user-id) {:something "or other"}))))
 ```
 The data we squirrelled away, at the repl, will now be used to create mocks for `bar` and `baz`.
