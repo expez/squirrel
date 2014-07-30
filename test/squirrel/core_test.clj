@@ -16,8 +16,8 @@
              (foo 1))
 
   (deftest saves-output
-    (is (=  {"squirrel.core_test/foo" {'(1) 1},
-             "squirrel.core_test/bar" {'(0) 1}}
+    (is (=  {"squirrel.core-test/foo" {'(1) 1},
+             "squirrel.core-test/bar" {'(0) 1}}
             (edn/read-string (slurp nuts)))))
 
   (deftest creates-mocks
