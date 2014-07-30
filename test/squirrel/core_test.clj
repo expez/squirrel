@@ -21,6 +21,8 @@
             (edn/read-string (slurp nuts)))))
 
   (deftest creates-mocks
-    (with-recordings [squirrel.core-test/foo
-                      squirrel.core-test/bar] nuts
-                        (is (= 1 (foo 1))))))
+    (with-redefs [foo (RuntimeException. "foo")
+                  bar (RuntimeException. "bar")]
+      (with-recordings [squirrel.core-test/foo
+                        squirrel.core-test/bar] nuts
+                        (is (= 1 (foo 1)))))))
